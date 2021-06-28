@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.blz.AddressBookApp.DTO.AddressBookDTO;
+import com.blz.AddressBookApp.Exception.AddressBookException;
 import com.blz.AddressBookApp.Model.AddressBookData;
 
 @Service
@@ -20,7 +21,8 @@ public class AddressBookService implements IAddressBookService {
 
 	@Override
 	public AddressBookData getAddressBookDataById(int personId) {
-		return addressBookList.get(personId - 1);
+		return addressBookList.stream().filter(list -> list.getAddressBookId() == personId).findFirst()
+				.orElseThrow(() -> new AddressBookException("Record not present"));
 	}
 
 	@Override
