@@ -1,4 +1,4 @@
-package com.blz.AddressBookAppDTO;
+package com.blz.AddressBookApp.DTO;
 
 public class ResponseDTO {
 

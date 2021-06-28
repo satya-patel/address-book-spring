@@ -1,6 +1,6 @@
-package com.blz.AddressBookAppModel;
+package com.blz.AddressBookApp.Model;
 
-import com.blz.AddressBookAppDTO.AddressBookDTO;
+import com.blz.AddressBookApp.DTO.AddressBookDTO;
 
 public class AddressBookData {
 
