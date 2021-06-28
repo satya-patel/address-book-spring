@@ -11,34 +11,37 @@ import com.blz.AddressBookApp.Model.AddressBookData;
 @Service
 public class AddressBookService implements IAddressBookService {
 
+	private List<AddressBookData> addressBookList = new ArrayList<>();
+
 	@Override
 	public List<AddressBookData> getAddressBookData() {
-		List<AddressBookData> addressBookList=new ArrayList<AddressBookData>();
-		addressBookList.add(new AddressBookData(1, new AddressBookDTO("Pallavi", "Btm")));
 		return addressBookList;
 	}
 
 	@Override
 	public AddressBookData getAddressBookDataById(int personId) {
-		AddressBookData addressBookData=new AddressBookData(personId, new AddressBookDTO("Jiya", "JP Nagar"));
-		return addressBookData;
+		return addressBookList.get(personId - 1);
 	}
 
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
-		AddressBookData addressBookData=new AddressBookData(3, addressBookDTO);
+		AddressBookData addressBookData = null;
+		addressBookData = new AddressBookData(addressBookList.size() + 1, addressBookDTO);
+		addressBookList.add(addressBookData);
 		return addressBookData;
 	}
 
 	@Override
-	public AddressBookData updateAddressBookData(AddressBookDTO addressBookDTO) {
-		AddressBookData addressBookData=new AddressBookData(3,addressBookDTO);
+	public AddressBookData updateAddressBookData(int personId, AddressBookDTO addressBookDTO) {
+		AddressBookData addressBookData = this.getAddressBookDataById(personId);
+		addressBookData.setName(addressBookDTO.name);
+		addressBookData.setAddress(addressBookDTO.address);
+		addressBookList.set(personId - 1, addressBookData);
 		return addressBookData;
 	}
 
 	@Override
 	public void deleteAddressBookData(int personId) {
-		// TODO Auto-generated method stub
-		
+		addressBookList.remove(personId - 1);
 	}
 }
