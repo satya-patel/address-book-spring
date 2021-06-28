@@ -21,8 +21,11 @@ import com.blz.AddressBookApp.DTO.ResponseDTO;
 import com.blz.AddressBookApp.Model.AddressBookData;
 import com.blz.AddressBookApp.Service.IAddressBookService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/addressBook")
+@Slf4j
 public class AddressBookController {
 
 	@Autowired
@@ -46,6 +49,7 @@ public class AddressBookController {
 
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addAddressBookData(@Valid @RequestBody AddressBookDTO addressBookDTO) {
+		log.debug("AddressBook Dto " + addressBookDTO.toString());
 		AddressBookData addressBookData = null;
 		addressBookData = addressBookService.createAddressBookData(addressBookDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Created Address Book Data Successfully:", addressBookData);
@@ -53,9 +57,10 @@ public class AddressBookController {
 	}
 
 	@PutMapping("/update/{personId}")
-	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("personId") int personId,@Valid @RequestBody AddressBookDTO addressBookDTO) {
+	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("personId") int personId,
+			@Valid @RequestBody AddressBookDTO addressBookDTO) {
 		AddressBookData addressBookData = null;
-		addressBookData = addressBookService.updateAddressBookData(personId,addressBookDTO);
+		addressBookData = addressBookService.updateAddressBookData(personId, addressBookDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Updated  Address Book Data Successfully:", addressBookData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
