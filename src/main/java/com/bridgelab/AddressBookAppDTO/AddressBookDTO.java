@@ -12,18 +12,21 @@ public class AddressBookDTO {
 	@NotEmpty(message = "Name cannot be null ")
 	public String name;
 
-	@Pattern(regexp = "^[A-Za-z,.0-9]{3,}$", message = "Address is Invalid")
+	@Pattern(regexp = "^([A-Za-z0-9/,-]{3,}[ ]?)+$", message = "Address is Invalid")
 	@NotEmpty(message = "Address cannot be null")
 	public String address;
 
-	@Pattern(regexp ="^[9][1][ ][6-9][0-9]{9}$", message = "PhoneNo is Invalid")
+	@Pattern(regexp = "^[9][1][ ][6-9][0-9]{9}$", message = "PhoneNo is Invalid")
 	@NotEmpty(message = "PhoneNo cannot be null")
 	public String phoneNumber;
 
+	@NotEmpty(message = "City cannot be null")
 	public String city;
 
+	@NotEmpty(message = "State cannot be null")
 	public String state;
 
-	public String zipcode;
+	@NotEmpty(message = "zipCode cannot be null")
+	public String zipCode;
 
 }
