@@ -1,12 +1,24 @@
 package com.blz.AddressBookApp.Model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.blz.AddressBookApp.DTO.AddressBookDTO;
 
 import lombok.Data;
 
 @Data
+@Entity
+@Table(name = "address_book")
 public class AddressBookData {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "addressbook_id")
 	private int addressBookId;
 	private String name;
 	private String address;
@@ -15,8 +27,7 @@ public class AddressBookData {
 	public String state;
 	public String zipCode;
 
-	public AddressBookData(int addressBookId, AddressBookDTO addressBookDTO) {
-		this.addressBookId = addressBookId;
+	public AddressBookData(AddressBookDTO addressBookDTO) {
 		this.updateAddressBookData(addressBookDTO);
 	}
 

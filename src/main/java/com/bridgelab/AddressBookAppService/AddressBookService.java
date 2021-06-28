@@ -3,14 +3,22 @@ package com.blz.AddressBookApp.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blz.AddressBookApp.DTO.AddressBookDTO;
 import com.blz.AddressBookApp.Exception.AddressBookException;
 import com.blz.AddressBookApp.Model.AddressBookData;
+import com.blz.AddressBookApp.Repository.AddressBookRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class AddressBookService implements IAddressBookService {
+	
+	@Autowired
+	private AddressBookRepository addressBookRepository;
 
 	private List<AddressBookData> addressBookList = new ArrayList<>();
 
@@ -28,9 +36,10 @@ public class AddressBookService implements IAddressBookService {
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
 		AddressBookData addressBookData = null;
-		addressBookData = new AddressBookData(addressBookList.size() + 1, addressBookDTO);
+		addressBookData = new AddressBookData(addressBookDTO);
 		addressBookList.add(addressBookData);
-		return addressBookData;
+		log.debug("AddressBook data : "+addressBookData.toString());
+		return addressBookRepository.save(addressBookData);
 	}
 
 	@Override
