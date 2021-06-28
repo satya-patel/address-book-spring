@@ -10,10 +10,12 @@ import javax.persistence.Table;
 import com.blz.AddressBookApp.DTO.AddressBookDTO;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "address_book")
+@NoArgsConstructor
 public class AddressBookData {
 
 	@Id
