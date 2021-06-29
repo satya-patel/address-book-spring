@@ -16,4 +16,6 @@ public interface IAddressBookService {
 	AddressBookData updateAddressBookData(int personId, AddressBookDTO addressBookDTO);
 
 	void deleteAddressBookData(int personId);
+
+	List<AddressBookData> getAddressByKeywordName(String keyword);
 }

@@ -31,7 +31,7 @@ public class AddressBookController {
 	@Autowired
 	private IAddressBookService addressBookService;
 
-	@RequestMapping(value = { "", "/", "get" })
+	@GetMapping(value = { "", "/", "get" })
 	public ResponseEntity<ResponseDTO> getAddressBookData() {
 		List<AddressBookData> addressBookData = null;
 		addressBookData = addressBookService.getAddressBookData();
@@ -44,6 +44,13 @@ public class AddressBookController {
 		AddressBookData addressBookData = null;
 		addressBookData = addressBookService.getAddressBookDataById(personId);
 		ResponseDTO responseDTO = new ResponseDTO("Get Call for id Successful:", addressBookData);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+	}
+	
+	@GetMapping("/name/{keyword}")
+	public ResponseEntity<ResponseDTO> getEmployeesByKeywordName(@PathVariable("keyword") String keyword) {
+		List<AddressBookData> addressBookData = addressBookService.getAddressByKeywordName(keyword);
+		ResponseDTO responseDTO = new ResponseDTO("Get call for the name successful: ", addressBookData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 

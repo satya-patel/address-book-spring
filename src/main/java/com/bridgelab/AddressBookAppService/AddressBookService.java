@@ -50,4 +50,9 @@ public class AddressBookService implements IAddressBookService {
 		AddressBookData addressBookDataById = this.getAddressBookDataById(personId);
 		addressBookRepository.delete(addressBookDataById);
 	}
+
+	@Override
+	public List<AddressBookData> getAddressByKeywordName(String keyword) {
+		return addressBookRepository.getAddressByKeywordName(keyword);
+	}
 }
